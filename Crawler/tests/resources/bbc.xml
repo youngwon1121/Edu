@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet title="XSL_formatting" type="text/xsl" href="/shared/bsp/xsl/rss/nolsol.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title>BBC News - Home</title>
+        <description>BBC News - Home</description>
+        <link>https://www.bbc.co.uk/news/</link>
+        <image>
+            <url>https://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif</url>
+            <title>BBC News - Home</title>
+            <link>https://www.bbc.co.uk/news/</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Wed, 18 Jan 2023 13:30:54 GMT</lastBuildDate>
+        <copyright>Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/2/hi/help/rss/4498287.stm
+            for terms and conditions of reuse.
+        </copyright>
+        <language>en-gb</language>
+        <ttl>15</ttl>
+        <item>
+            <title>Ukraine interior ministry leadership killed in helicopter crash</title>
+            <description>Ukraine's interior minister, his deputy, and another official are among 17 killed in the
+                crash.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-europe-64315594?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-europe-64315594</guid>
+            <pubDate>Wed, 18 Jan 2023 12:44:55 GMT</pubDate>
+        </item>
+        <item>
+            <title>Police investigator quit over black athletes' stop and search case</title>
+            <description>Trisha Napier says her investigation of the Bianca Williams and Ricardo Dos Santos case was
+                "watered down".
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64304500?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64304500</guid>
+            <pubDate>Wed, 18 Jan 2023 12:02:34 GMT</pubDate>
+        </item>
+        <item>
+            <title>All forces must check officers against police database, says Home Office</title>
+            <description>The order follows the serving Met Police officer David Carrick admitting to being a serial
+                rapist.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64319133?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64319133</guid>
+            <pubDate>Wed, 18 Jan 2023 13:24:18 GMT</pubDate>
+        </item>
+        <item>
+            <title>Keep cake away from office, suggests food watchdog head</title>
+            <description>The Food Standards Agency chairwoman says workers should think about colleagues' health.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64315384?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64315384</guid>
+            <pubDate>Wed, 18 Jan 2023 12:30:11 GMT</pubDate>
+        </item>
+        <item>
+            <title>World's oldest person, French nun Sister André, dies aged 118</title>
+            <description>Sister André, a French nun who took holy orders in 1944, died at her nursing home in Toulon.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-europe-64314673?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-europe-64314673</guid>
+            <pubDate>Wed, 18 Jan 2023 08:12:04 GMT</pubDate>
+        </item>
+        <item>
+            <title>Ambulance staff and nurses to strike on same day</title>
+            <description>The walkout in England and Wales on 6 February is set to be the biggest yet in this NHS pay
+                dispute.
+            </description>
+            <link>https://www.bbc.co.uk/news/health-64308935?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/health-64308935</guid>
+            <pubDate>Wed, 18 Jan 2023 13:05:41 GMT</pubDate>
+        </item>
+        <item>
+            <title>Plane ticket prices soared by 44% in December</title>
+            <description>Air fares rose at the fastest pace since 1989 while coach travel costs also jumped.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-64315925?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64315925</guid>
+            <pubDate>Wed, 18 Jan 2023 13:24:59 GMT</pubDate>
+        </item>
+        <item>
+            <title>Ian Kirwan: Boy guilty of Redditch Asda stabbing murder</title>
+            <description>Ian Kirwan was stabbed to death after telling off teens for messing about in Asda store
+                toilets.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-england-hereford-worcester-64235272?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-england-hereford-worcester-64235272</guid>
+            <pubDate>Wed, 18 Jan 2023 13:20:26 GMT</pubDate>
+        </item>
+        <item>
+            <title>First MoT could be delayed to cut costs for drivers</title>
+            <description>Testing cars after four years - rather than three - would not affect road safety, the
+                government says.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-politics-64318141?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-politics-64318141</guid>
+            <pubDate>Wed, 18 Jan 2023 12:10:00 GMT</pubDate>
+        </item>
+        <item>
+            <title>Kaylea Titford: Father's neglect led to obese daughter's death, court told</title>
+            <description>Kaylea, 16, was found dead at home, weighing almost 23 stone and on soiled sheets, a court
+                hears.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-wales-64317360?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-wales-64317360</guid>
+            <pubDate>Wed, 18 Jan 2023 12:57:11 GMT</pubDate>
+        </item>
+        <item>
+            <title>Polar bear kills woman and boy in Alaska village</title>
+            <description>The bear entered a remote community and began chasing after residents before being shot dead,
+                police said.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-us-canada-64315398?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-us-canada-64315398</guid>
+            <pubDate>Wed, 18 Jan 2023 10:20:24 GMT</pubDate>
+        </item>
+        <item>
+            <title>UK inflation rate calculator: How much are prices rising for you?</title>
+            <description>Use our calculator to find out how much the cost of living is going up in your household.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-62558817?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-62558817</guid>
+            <pubDate>Wed, 18 Jan 2023 07:08:42 GMT</pubDate>
+        </item>
+        <item>
+            <title>Can I get a Cold Weather Payment and how much are they?</title>
+            <description>Cold Weather Payments are available to some when there is a run of sub-zero temperatures.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-55992592?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-55992592</guid>
+            <pubDate>Wed, 18 Jan 2023 11:44:51 GMT</pubDate>
+        </item>
+        <item>
+            <title>Takeaway owner says free pizzas offer has been 'very stressful'</title>
+            <description>Takeaway owner Marc Wilkinson says the giveaway will cost him three times more than he
+                estimated.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-scotland-edinburgh-east-fife-64306961?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-scotland-edinburgh-east-fife-64306961</guid>
+            <pubDate>Wed, 18 Jan 2023 06:18:30 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: Five tips when asking for a pay rise</title>
+            <description>Recruiters, a manager and a workplace psychologist give their advice on how to negotiate for
+                more money.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-64288791?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64288791</guid>
+            <pubDate>Tue, 17 Jan 2023 14:26:00 GMT</pubDate>
+        </item>
+        <item>
+            <title>How to stay warm and cope with the cold weather</title>
+            <description>Much of the UK is facing another cold snap amid rising fuel costs.</description>
+            <link>https://www.bbc.co.uk/news/uk-63888234?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-63888234</guid>
+            <pubDate>Tue, 17 Jan 2023 10:08:50 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: Debt fears after Christmas on credit</title>
+            <description>A charity says the knock-on effect will be felt in coming months as people cannot pay their
+                bills.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-wales-64309914?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-wales-64309914</guid>
+            <pubDate>Wed, 18 Jan 2023 06:11:29 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: What do I do if I can't afford to pay my debts?</title>
+            <description>What help and options are available to people struggling with debt repayments?</description>
+            <link>https://www.bbc.co.uk/news/business-64291327?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64291327</guid>
+            <pubDate>Mon, 16 Jan 2023 12:27:07 GMT</pubDate>
+        </item>
+        <item>
+            <title>Dr Ranj: Four ways to protect your mental health as debt rises</title>
+            <description>The rising cost of living can be stressful but there are steps you can take to help.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-64290817?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64290817</guid>
+            <pubDate>Mon, 16 Jan 2023 12:40:53 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: The father and son who write poetry for tough times</title>
+            <description>Winston "Mayor" Lindsay and his son, Zayden, perform poetry about socio-economic issues.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-england-nottinghamshire-64237224?at_medium=RSS&amp;at_campaign=KARANGA
+            </link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-england-nottinghamshire-64237224</guid>
+            <pubDate>Sun, 15 Jan 2023 00:22:20 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: The young people saving money by going sober</title>
+            <description>With the price of alcohol going up, young people say they're saving money by going sober.
+            </description>
+            <link>https://www.bbc.co.uk/news/newsbeat-64176409?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/newsbeat-64176409</guid>
+            <pubDate>Mon, 16 Jan 2023 00:03:50 GMT</pubDate>
+        </item>
+        <item>
+            <title>The Suffolk manor house where 60 people live together</title>
+            <description>Members of a farming community who live in an old friary feel protected from the cost-of-living
+                crisis.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-england-suffolk-64153693?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-england-suffolk-64153693</guid>
+            <pubDate>Mon, 09 Jan 2023 06:20:23 GMT</pubDate>
+        </item>
+        <item>
+            <title>Cost of living: 'We had to bath our kids in the kitchen sink'</title>
+            <description>A rural family who ran out of heating oil say they were forced to wash their children in the
+                kitchen.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-england-derbyshire-64213649?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-england-derbyshire-64213649</guid>
+            <pubDate>Wed, 11 Jan 2023 03:03:49 GMT</pubDate>
+        </item>
+        <item>
+            <title>Repairing broken gadgets for a greener future</title>
+            <description>A group of volunteers in Camden, London, want to save your broken electricals from the
+                scrapheap.
+            </description>
+            <link>https://www.bbc.co.uk/news/in-pictures-63737951?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/in-pictures-63737951</guid>
+            <pubDate>Tue, 10 Jan 2023 02:48:19 GMT</pubDate>
+        </item>
+        <item>
+            <title>What is the energy price cap and what will happen to bills?</title>
+            <description>The energy bill support package will continue after April, but will be less generous.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-58090533?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-58090533</guid>
+            <pubDate>Mon, 09 Jan 2023 19:52:01 GMT</pubDate>
+        </item>
+        <item>
+            <title>Can batch cooking help cut your shopping bills?</title>
+            <description>Suzanne Mulholland's time saving tips have gathered her a significant following on social
+                media.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-scotland-south-scotland-64162405?at_medium=RSS&amp;at_campaign=KARANGA
+            </link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-scotland-south-scotland-64162405</guid>
+            <pubDate>Sun, 08 Jan 2023 09:23:25 GMT</pubDate>
+        </item>
+        <item>
+            <title>Energy bills: What cost-of-living payments are available and how do you claim?</title>
+            <description>Low-income households, pensioners and some disabled people can get extra help with energy
+                bills.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-61592496?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-61592496</guid>
+            <pubDate>Tue, 10 Jan 2023 11:19:38 GMT</pubDate>
+        </item>
+        <item>
+            <title>Shower at home vs at the gym: What’s cheaper?</title>
+            <description>We investigate if getting a gym membership could actually save you money in the shower.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-63988095?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-63988095</guid>
+            <pubDate>Wed, 04 Jan 2023 23:03:04 GMT</pubDate>
+        </item>
+        <item>
+            <title>What is the UK inflation rate and why is the cost of living rising?</title>
+            <description>The rate at which prices are rising has fallen slightly, but inflation remains near a 40-year
+                high.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-12196322?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-12196322</guid>
+            <pubDate>Wed, 18 Jan 2023 09:19:07 GMT</pubDate>
+        </item>
+        <item>
+            <title>BBC Food's family £1 recipe meal plan</title>
+            <description>This budget-friendly meal plan covers a week's worth of dinners for four adults, coming in at
+                under £28 in total.
+            </description>
+            <link>
+                https://www.bbc.co.uk/food/articles/budget_family_meal_plan_for_four#xtor=CS8-1000-%5BEditorialPromo_Box%5D-%5BNewsEditorial_Promo%5D-%5BNewsEditorial_Promo%5D-%5BPS_FOOD~N~~P_budget_meal_plannerFP%5D
+            </link>
+            <guid isPermaLink="true">
+                https://www.bbc.co.uk/food/articles/budget_family_meal_plan_for_four#xtor=CS8-1000-%5BEditorialPromo_Box%5D-%5BNewsEditorial_Promo%5D-%5BNewsEditorial_Promo%5D-%5BPS_FOOD~N~~P_budget_meal_plannerFP%5D
+            </guid>
+            <pubDate>Tue, 18 Oct 2022 11:42:16 GMT</pubDate>
+        </item>
+        <item>
+            <title>Iran protests: 15 minutes to defend yourself against the death penalty</title>
+            <description>Iran's courts are convicting protesters after fast-track trials that activists say are grossly
+                unfair.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-middle-east-64302726?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-middle-east-64302726</guid>
+            <pubDate>Wed, 18 Jan 2023 07:21:42 GMT</pubDate>
+        </item>
+        <item>
+            <title>Seoul Halloween crush: A grieving father's promise to his daughter</title>
+            <description>Relatives say authorities are responding to the disaster in a cold and indifferent way.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-asia-64300192?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-asia-64300192</guid>
+            <pubDate>Tue, 17 Jan 2023 22:04:10 GMT</pubDate>
+        </item>
+        <item>
+            <title>Scotland Gender Recognition Bill: What are the sticking points?</title>
+            <description>A plan to make it easier to get a gender recognition certificate has led to a constitutional
+                row.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64304740?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64304740</guid>
+            <pubDate>Tue, 17 Jan 2023 18:15:01 GMT</pubDate>
+        </item>
+        <item>
+            <title>'Rugby helped me heal after the pain of stillbirth'</title>
+            <description>A woman who had a stillborn baby says playing rugby saved her life.</description>
+            <link>https://www.bbc.co.uk/news/uk-england-nottinghamshire-64292254?at_medium=RSS&amp;at_campaign=KARANGA
+            </link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-england-nottinghamshire-64292254</guid>
+            <pubDate>Tue, 17 Jan 2023 23:41:47 GMT</pubDate>
+        </item>
+        <item>
+            <title>Nigeria elections 2023: How influencers are secretly paid by political parties</title>
+            <description>Nigerian politicians are hiring social media influencers to spread disinformation ahead of
+                February's elections.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-africa-63719505?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-africa-63719505</guid>
+            <pubDate>Wed, 18 Jan 2023 01:10:31 GMT</pubDate>
+        </item>
+        <item>
+            <title>Chess gets a risqué makeover</title>
+            <description>Ilya Merenzon, CEO of World Chess, shares his business advice for our CEO Secrets series.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-64303222?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64303222</guid>
+            <pubDate>Tue, 17 Jan 2023 23:39:03 GMT</pubDate>
+        </item>
+        <item>
+            <title>Strikes Update: How nurses' strikes on Wednesday will affect you</title>
+            <description>What you need to know about the nurses' strike and other industrial action, by the BBC's Zoe
+                Conway.
+            </description>
+            <link>https://www.bbc.co.uk/news/business-64258402?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/business-64258402</guid>
+            <pubDate>Tue, 17 Jan 2023 17:21:51 GMT</pubDate>
+        </item>
+        <item>
+            <title>Matteo Messina Denaro: How Mafia boss was caught on a visit to a clinic</title>
+            <description>Italian police arrested Matteo Messina Denaro as he walked from a clinic to a cafe.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-europe-64302105?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-europe-64302105</guid>
+            <pubDate>Tue, 17 Jan 2023 15:25:19 GMT</pubDate>
+        </item>
+        <item>
+            <title>Andrey Medvedev: How Russian mercenary says he made an icy escape to Norway</title>
+            <description>Andrey Medvedev's escape makes him the first Wagner Group mercenary to defect to the West.
+            </description>
+            <link>https://www.bbc.co.uk/news/world-europe-64303652?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/world-europe-64303652</guid>
+            <pubDate>Tue, 17 Jan 2023 14:57:12 GMT</pubDate>
+        </item>
+        <item>
+            <title>Madonna announces a career-spanning greatest hits tour</title>
+            <description>The global tour will celebrate the 40th anniversary of her breakthrough single, Holiday, in
+                1983.
+            </description>
+            <link>https://www.bbc.co.uk/news/entertainment-arts-64306753?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/entertainment-arts-64306753</guid>
+            <pubDate>Tue, 17 Jan 2023 16:41:30 GMT</pubDate>
+        </item>
+        <item>
+            <title>Prince William reveals who's the best cook at home</title>
+            <description>The Prince of Wales unveils his winning dish in the kitchen and rates Catherine's culinary
+                skills too.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64310099?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64310099</guid>
+            <pubDate>Tue, 17 Jan 2023 16:31:18 GMT</pubDate>
+        </item>
+        <item>
+            <title>Children pay royal tribute with their word of 2022</title>
+            <description>Six to 14 year-olds were asked in a survey for words they felt had been important during the
+                year.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-64291095?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-64291095</guid>
+            <pubDate>Tue, 17 Jan 2023 03:04:55 GMT</pubDate>
+        </item>
+        <item>
+            <title>BBC Breakfast: Forty years of early morning bloopers</title>
+            <description>A look back at some of the unexpected funny moments in the history of the BBC's morning news
+                programme.
+            </description>
+            <link>https://www.bbc.co.uk/news/entertainment-arts-64266108?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/entertainment-arts-64266108</guid>
+            <pubDate>Mon, 16 Jan 2023 23:41:40 GMT</pubDate>
+        </item>
+        <item>
+            <title>Scotland gender bill: What next for Sunak and Sturgeon?</title>
+            <description>The Union has a clash on its hands, writes James Cook, BBC News's Scotland editor.
+            </description>
+            <link>https://www.bbc.co.uk/news/uk-politics-64300263?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/news/uk-politics-64300263</guid>
+            <pubDate>Tue, 17 Jan 2023 08:26:47 GMT</pubDate>
+        </item>
+        <item>
+            <title>Australian Open 2023 results: Emma Raducanu loses to Coco Gauff in Melbourne</title>
+            <description>British number one Emma Raducanu is out of the Australian Open after losing in straight sets to
+                Coco Gauff in an entertaining second-round match.
+            </description>
+            <link>https://www.bbc.co.uk/sport/tennis/64316023?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/sport/tennis/64316023</guid>
+            <pubDate>Wed, 18 Jan 2023 10:50:32 GMT</pubDate>
+        </item>
+        <item>
+            <title>Snooker match-fixing investigation - 10 Chinese players charged by WPBSA</title>
+            <description>Ten Chinese players face match-fixing charges as snooker's governing body investigates the
+                sport's biggest corruption scandal.
+            </description>
+            <link>https://www.bbc.co.uk/sport/snooker/64297128?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/sport/snooker/64297128</guid>
+            <pubDate>Wed, 18 Jan 2023 11:46:35 GMT</pubDate>
+        </item>
+        <item>
+            <title>Nadal 'mentally destroyed' after second-round exit</title>
+            <description>Injured Rafael Nadal says he is "mentally destroyed" after his Australian Open title defence
+                comes to an end in the second round.
+            </description>
+            <link>https://www.bbc.co.uk/sport/tennis/64314854?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/sport/tennis/64314854</guid>
+            <pubDate>Wed, 18 Jan 2023 09:00:23 GMT</pubDate>
+        </item>
+        <item>
+            <title>Equal pay: Football Association of Wales agree landmark deal</title>
+            <description>Wales' men's and women's senior players will be paid the same for representing their country
+                for the first time.
+            </description>
+            <link>https://www.bbc.co.uk/sport/football/64299007?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/sport/football/64299007</guid>
+            <pubDate>Wed, 18 Jan 2023 12:01:43 GMT</pubDate>
+        </item>
+        <item>
+            <title>Masterclass: Alessia Russo of Man Utd shows you how to be a top forward</title>
+            <description>England and Manchester United striker Alessia Russo breaks down her game in a close-range
+                finishing masterclass, including forward runs, first touch and plenty of goalscoring.
+            </description>
+            <link>https://www.bbc.co.uk/sport/av/football/64263851?at_medium=RSS&amp;at_campaign=KARANGA</link>
+            <guid isPermaLink="false">https://www.bbc.co.uk/sport/av/football/64263851</guid>
+            <pubDate>Wed, 18 Jan 2023 07:22:39 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

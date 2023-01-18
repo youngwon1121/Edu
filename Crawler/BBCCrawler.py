@@ -1,30 +1,43 @@
+import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-class BBCCralwer:
+class BBCCrawler:
     def __init__(self, url):
         self.url = url
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        options.add_argument('window-size=1920x1080')
-        options.add_argument("disable-gpu")
-
-        self.driver = webdriver.Chrome("../chromedriver", chrome_options=options)
 
     def get(self):
-        self._get_links()
-        self._get_details()
+        urls = self._get_links()
+        return self._get_details(urls)
 
     def _get_links(self):
-        self.driver.get(self.url)
-        return [e.get_attribute('href') for e in self.driver.find_elements(by=By.CLASS_NAME, value="btn_detail")[:10]]
+        response = requests.get("http://feeds.bbci.co.uk/news/rss.xml")
+        return self._parse_index(response.content)
+
+    def _parse_index(self, xml):
+        soup = BeautifulSoup(xml, "xml")
+        return [link.get_text() for link in soup.select('item > link')[:10]]
 
     def _get_details(self, urls):
+        data = []
         for url in urls:
-            self.driver.get(url)
+            response = requests.get(url).content
+            parse_data = self._parse_detail(response)
+            parse_data['url'] = url
+            data.append(parse_data)
+        return data
 
-            title = self.driver.find_element(by=By.CLASS_NAME, value="title").text
-            body = self.driver.find_element(by=By.ID, value="articleBody").get_attribute('innerHtml')
-            attachment_list = [e.find_element(By.TAG_NAME, "a").text
-                               for e in self.driver.find_elements(by=By.CLASS_NAME, value="file-anchor")]
+    def _parse_detail(self, html):
+        soup = BeautifulSoup(html, 'html.parser')
+
+        title = soup.find("h1", id="main-heading").string
+        body = "".join(map(str, soup.select("article > div")))
+        published_datetime = soup.select_one("header time")['datetime']
+        return {
+            'title': title,
+            'body': body,
+            'published_datetime': published_datetime,
+            'attachment_list': []
+        }
