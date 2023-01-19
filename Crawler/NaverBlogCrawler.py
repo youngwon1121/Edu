@@ -1,40 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 class NaverBlogCrawler:
     def __init__(self, url):
         self.url = url
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        options.add_argument('window-size=1920x1080')
-        options.add_argument("disable-gpu")
-
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     def get(self):
         urls = self._get_links()
         return self._get_details(urls)
 
     def _get_links(self):
-        self.driver.get(url=self.url)
-        # print(requests.get(url=self.url).content)
-        return self._parse_index(self.driver.page_source)
+        response = requests.get(self.url).content
+        return self._parse_index(response)
 
     def _parse_index(self, html):
         soup = BeautifulSoup(html, 'html.parser')
-        return ['https://blog.naver.com' + item['href'] for item in soup.find_all("a", class_="link pcol2")[:10]]
+        return ['https://blog.naver.com' + item['href'] for item in soup.select('.item .link')]
 
     def _get_details(self, urls):
         data = []
         for url in urls:
-            self.driver.get(url)
-            parsed_data = self._parse_detail(self.driver.page_source)
+            response = requests.get(url).content
+            parsed_data = self._parse_detail(response)
             parsed_data['url'] = url
-            data.append(url)
+            data.append(parsed_data)
         return data
 
     def _parse_detail(self, html):

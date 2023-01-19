@@ -42,6 +42,7 @@ class NaverBlogCrawlerTest(TestCase):
             "221109(18시) 새정부 첫번째 수소경제위원회 개최, 수소산업 본격 성장을 위한 정책방향 제시(해양수산과학기술정책과).hwpx",
             "221109(18시) 새정부 첫번째 수소경제위원회 개최, 수소산업 본격 성장을 위한 정책방향 제시(해양수산과학기술정책과).pdf"
         ])
+        self.assertTrue(str(data['body']).startswith('<div class="se-main-container">'))
 
 
 
