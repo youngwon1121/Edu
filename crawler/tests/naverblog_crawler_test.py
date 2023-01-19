@@ -1,10 +1,6 @@
 from unittest import TestCase
 
-import requests
-from bs4 import BeautifulSoup
-
-from Crawler.BBCCrawler import BBCCrawler
-from Crawler.NaverBlogCrawler import NaverBlogCrawler
+from crawler.NaverBlogCrawler import NaverBlogCrawler
 
 
 class NaverBlogCrawlerTest(TestCase):

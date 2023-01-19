@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from Crawler.IamCrawler import IamCrawler
+
+from crawler.IamCrawler import IamCrawler
 
 
 class IamCrawlerTest(TestCase):

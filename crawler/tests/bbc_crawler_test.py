@@ -3,7 +3,7 @@ from unittest import TestCase
 import requests
 from bs4 import BeautifulSoup
 
-from Crawler.BBCCrawler import BBCCrawler
+from crawler.BBCCrawler import BBCCrawler
 
 
 class BBCCrawlerTest(TestCase):

@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 class BBCCrawler:
     def __init__(self, url):
         self.url = url
+        self.site = "BBC"
 
     def get(self):
         urls = self._get_links()
@@ -23,6 +24,7 @@ class BBCCrawler:
             response = requests.get(url).content
             parse_data = self._parse_detail(response)
             parse_data['url'] = url
+            parse_data['site'] = self.site
             data.append(parse_data)
         return data
 

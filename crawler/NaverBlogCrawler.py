@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 class NaverBlogCrawler:
     def __init__(self, url):
         self.url = url
+        self.site = "NAVERBLOG"
 
     def get(self):
         urls = self._get_links()
@@ -16,7 +17,7 @@ class NaverBlogCrawler:
 
     def _parse_index(self, html):
         soup = BeautifulSoup(html, 'html.parser')
-        return ['https://blog.naver.com' + item['href'] for item in soup.select('.item .link')]
+        return ['https://blog.naver.com' + item['href'] for item in soup.select('.item .link')[:10]]
 
     def _get_details(self, urls):
         data = []
@@ -24,6 +25,7 @@ class NaverBlogCrawler:
             response = requests.get(url).content
             parsed_data = self._parse_detail(response)
             parsed_data['url'] = url
+            parsed_data['site'] = self.site
             data.append(parsed_data)
         return data
 
