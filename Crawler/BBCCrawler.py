@@ -1,8 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
 
 class BBCCrawler:
     def __init__(self, url):
@@ -23,7 +20,6 @@ class BBCCrawler:
     def _get_details(self, urls):
         data = []
         for url in urls:
-            print(url)
             response = requests.get(url).content
             parse_data = self._parse_detail(response)
             parse_data['url'] = url
