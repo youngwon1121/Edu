@@ -23,6 +23,7 @@ class BBCCrawler:
     def _get_details(self, urls):
         data = []
         for url in urls:
+            print(url)
             response = requests.get(url).content
             parse_data = self._parse_detail(response)
             parse_data['url'] = url
@@ -32,7 +33,7 @@ class BBCCrawler:
     def _parse_detail(self, html):
         soup = BeautifulSoup(html, 'html.parser')
 
-        title = soup.find("h1", id="main-heading").string
+        title = soup.find("h1", id="main-heading").get_text(strip=True)
         body = "".join(map(str, soup.select("article > div")))
         published_datetime = soup.select_one("header time")['datetime']
         return {

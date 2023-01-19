@@ -2,7 +2,9 @@ from urllib.parse import urlparse
 
 import requests
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class IamCrawler:
@@ -13,7 +15,7 @@ class IamCrawler:
         options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
 
-        self.driver = webdriver.Chrome("../chromedriver", chrome_options=options)
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     def get(self):
         json = self._get_json()
