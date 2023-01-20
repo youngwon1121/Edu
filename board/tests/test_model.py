@@ -13,7 +13,7 @@ class MyTestCase(TestCase):
         p = Post(
             url="https://school.iamservice.net/organization/1674/group/2001892",
             title="2023학년도 교과서 목록",
-            body="2023학년도 교과서 목록입니다.",
+            body="aa👏",
             published_datetime=timezone.now(),
             site=Site.IAM
         )

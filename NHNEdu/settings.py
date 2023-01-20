@@ -83,7 +83,10 @@ DATABASES = {
         'PORT': 3307,
         'HOST': '127.0.0.1',
         'USER': 'root',
-        'PASSWORD': 'example'
+        'PASSWORD': 'example',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        }
     }
 }
 
