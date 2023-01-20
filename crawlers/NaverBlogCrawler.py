@@ -1,4 +1,6 @@
+import re
 import zoneinfo
+from datetime import timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -38,11 +40,22 @@ class NaverBlogCrawler:
         body = soup.find(class_="se-main-container")
         published_datetime = soup.find(class_="se_publishDate").get_text(strip=True)
         attachment_list = [item.get_text(strip=True) for item in soup.find_all(class_="se-file-name-container")]
-
-        published_datetime = timezone.datetime.strptime(published_datetime, '%Y. %m. %d. %H:%M').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
+        published_datetime = self._parse_datetime(published_datetime)
         return {
             'title': title,
             'body': str(body),
             'published_datetime': published_datetime,
             'attachment_list': attachment_list
         }
+
+    def _parse_datetime(self, dt):
+        if r := re.search(r'(\d+)(?=분 전)', dt):
+            return timezone.now() - timedelta(minutes=int(r.group()))
+
+        elif r:= re.search(r'(\d+)(?=시간 전)', dt):
+            return timezone.now() - timedelta(hours=int(r.group()))
+
+        else:
+            return timezone.datetime.strptime(dt, '%Y. %m. %d. %H:%M').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
+
+

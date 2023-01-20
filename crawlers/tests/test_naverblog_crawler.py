@@ -1,6 +1,6 @@
+import datetime
 import os
 
-from django.core.files import File
 from django.test import TestCase
 from zoneinfo import ZoneInfo
 
@@ -53,12 +53,11 @@ class NaverBlogCrawlerTest(TestCase):
 
 
     def test_parse_time(self):
+        # given
         times = ["5분 전", "58분 전", "1시간 전", "11시간 전"]
-        print(timezone.now())
+        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
 
-
-
-
-
-
+        #when
+        for time in times:
+            crawler._parse_datetime(time)
 
