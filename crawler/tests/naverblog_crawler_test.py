@@ -1,4 +1,7 @@
 from unittest import TestCase
+from zoneinfo import ZoneInfo
+
+from django.utils import timezone
 
 from crawler.NaverBlogCrawler import NaverBlogCrawler
 
@@ -39,6 +42,8 @@ class NaverBlogCrawlerTest(TestCase):
             "221109(18시) 새정부 첫번째 수소경제위원회 개최, 수소산업 본격 성장을 위한 정책방향 제시(해양수산과학기술정책과).pdf"
         ])
         self.assertTrue(str(data['body']).startswith('<div class="se-main-container">'))
+        self.assertEqual(data['published_datetime'].tzinfo, ZoneInfo('Asia/Seoul'))
+        self.assertTrue(timezone.is_aware(data['published_datetime']))
 
 
 

@@ -1,5 +1,8 @@
+import zoneinfo
+
 import requests
 from bs4 import BeautifulSoup
+from django.utils import timezone
 
 
 class NaverBlogCrawler:
@@ -35,9 +38,11 @@ class NaverBlogCrawler:
         body = soup.find(class_="se-main-container")
         published_datetime = soup.find(class_="se_publishDate").get_text(strip=True)
         attachment_list = [item.get_text(strip=True) for item in soup.find_all(class_="se-file-name-container")]
+
+        published_datetime = timezone.datetime.strptime(published_datetime, '%Y. %m. %d. %H:%M').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
         return {
             'title': title,
-            'body': body,
+            'body': str(body),
             'published_datetime': published_datetime,
             'attachment_list': attachment_list
         }

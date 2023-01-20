@@ -1,5 +1,9 @@
+import zoneinfo
+
 import requests
 from bs4 import BeautifulSoup
+from django.utils import timezone
+
 
 class BBCCrawler:
     def __init__(self, url):
@@ -33,7 +37,9 @@ class BBCCrawler:
 
         title = soup.find("h1", id="main-heading").get_text(strip=True)
         body = "".join(map(str, soup.select("article > div")))
+
         published_datetime = soup.select_one("header time")['datetime']
+        published_datetime = timezone.datetime.strptime(published_datetime, '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=zoneinfo.ZoneInfo("UTC"))
         return {
             'title': title,
             'body': body,

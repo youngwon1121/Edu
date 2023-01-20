@@ -1,7 +1,7 @@
 from unittest import TestCase
+from zoneinfo import ZoneInfo
 
-import requests
-from bs4 import BeautifulSoup
+from django.utils import timezone
 
 from crawler.BBCCrawler import BBCCrawler
 
@@ -37,3 +37,5 @@ class BBCCrawlerTest(TestCase):
 
         #then
         self.assertEqual(data['title'], "Ukraine's interior ministry leadership killed in helicopter crash")
+        self.assertEqual(data['published_datetime'].tzinfo, ZoneInfo('UTC'))
+        self.assertTrue(timezone.is_aware(data['published_datetime']))

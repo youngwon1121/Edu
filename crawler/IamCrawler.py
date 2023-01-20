@@ -1,6 +1,8 @@
+import zoneinfo
 from urllib.parse import urlparse
 
 import requests
+from django.utils import timezone
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -36,13 +38,13 @@ class IamCrawler:
 
             self.driver.get(url)
             body = self.driver.find_element(by=By.ID, value="articleBody").get_attribute('innerHTML')
-
+            published_datetime = timezone.datetime.strptime(article['pub_date'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
             data.append({
                 'url': url,
                 'site': self.site,
                 'title': article['title'],
                 'body': body,
-                'published_datetime': article['pub_date'],
+                'published_datetime': published_datetime,
                 'attachment_list': [file['title'] for file in article['files']]
             })
         return data
