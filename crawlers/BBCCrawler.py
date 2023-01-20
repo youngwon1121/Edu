@@ -20,7 +20,7 @@ class BBCCrawler:
 
     def _parse_index(self, xml):
         soup = BeautifulSoup(xml, "xml")
-        return [link.get_text() for link in soup.select('item > link')[:10]]
+        return [link.get_text() for link in soup.select('item > link') if "/news/" in link.get_text()][:10]
 
     def _get_details(self, urls):
         data = []
