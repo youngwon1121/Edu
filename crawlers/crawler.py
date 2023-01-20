@@ -1,9 +1,8 @@
-from typing import Optional
 from urllib.parse import urlparse
 
-from crawler.BBCCrawler import BBCCrawler
-from crawler.IamCrawler import IamCrawler
-from crawler.NaverBlogCrawler import NaverBlogCrawler
+from crawlers.BBCCrawler import BBCCrawler
+from crawlers.IamCrawler import IamCrawler
+from crawlers.NaverBlogCrawler import NaverBlogCrawler
 
 
 def crawler_factory(url):

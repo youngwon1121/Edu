@@ -1,10 +1,15 @@
-from unittest import TestCase
+import os
+
+from django.test import TestCase
 
 
-from crawler.IamCrawler import IamCrawler
+from crawlers.IamCrawler import IamCrawler
 
 
 class IamCrawlerTest(TestCase):
+    def setUp(self) -> None:
+        self.path = os.path.dirname(__file__)
+
     def test_get_api_url(self):
         # given
         crawler = IamCrawler(url="https://school.iamservice.net/organization/19710/group/2091428")

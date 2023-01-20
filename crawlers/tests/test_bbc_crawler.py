@@ -1,16 +1,21 @@
-from unittest import TestCase
+import os
+
+from django.test import TestCase
 from zoneinfo import ZoneInfo
 
 from django.utils import timezone
 
-from crawler.BBCCrawler import BBCCrawler
+from crawlers.BBCCrawler import BBCCrawler
 
 
 class BBCCrawlerTest(TestCase):
+    def setUp(self) -> None:
+        self.path = os.path.dirname(__file__)
+
     def test_parse_index(self):
         # given
         crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
-        xml = open("./resources/bbc.xml").read()
+        xml = open(self.path + "/resources/bbc.xml").read()
 
         # when
         urls = crawler._parse_index(xml)
@@ -30,7 +35,7 @@ class BBCCrawlerTest(TestCase):
     def test_parse_detail(self):
         # given
         crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
-        xml = open("resources/bbc_detail.html").read()
+        xml = open(self.path + "/resources/bbc_detail.html").read()
 
         # when
         data = crawler._parse_detail(xml)

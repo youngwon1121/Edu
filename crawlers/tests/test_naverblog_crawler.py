@@ -1,16 +1,21 @@
-from unittest import TestCase
+import os
+
+from django.core.files import File
+from django.test import TestCase
 from zoneinfo import ZoneInfo
 
 from django.utils import timezone
 
-from crawler.NaverBlogCrawler import NaverBlogCrawler
+from crawlers.NaverBlogCrawler import NaverBlogCrawler
 
 
 class NaverBlogCrawlerTest(TestCase):
+    def setUp(self) -> None:
+        self.path = os.path.dirname(__file__)
     def test_parse_index(self):
         # given
         crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
-        html = open("./resources/naverblog.html").read()
+        html = open(self.path + "/resources/naverblog.html").read()
 
         # when
         urls = crawler._parse_index(html)
@@ -30,7 +35,7 @@ class NaverBlogCrawlerTest(TestCase):
     def test_parse_detail(self):
         # given
         crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
-        html = open("./resources/naverblog_detail.html").read()
+        html = open(self.path + "/resources/naverblog_detail.html").read()
 
         # when
         data = crawler._parse_detail(html)
@@ -47,6 +52,9 @@ class NaverBlogCrawlerTest(TestCase):
 
 
 
+    def test_parse_time(self):
+        times = ["5분 전", "58분 전", "1시간 전", "11시간 전"]
+        print(timezone.now())
 
 
 
