@@ -61,3 +61,13 @@ class NaverBlogCrawlerTest(TestCase):
         for time in times:
             crawler._parse_datetime(time)
 
+    def test_create_site_id(self):
+        #given
+        urls = [
+            'https://blog.naver.com/PostView.naver?blogId=hellopolicy&logNo=222989752607&categoryNo=168&parentCategoryNo=&from=thumbnailList',
+            'https://blog.naver.com/PostView.naver?blogId=hellopolicy&logNo=222930899202&categoryNo=168&parentCategoryNo=&from=thumbnailList']
+
+        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
+
+        # when then
+        self.assertEqual('blogId=hellopolicy&logNo=222989752607', crawler.to_site_id(urls[0]))

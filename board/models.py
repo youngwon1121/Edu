@@ -12,6 +12,7 @@ class Post(models.Model):
     title = models.CharField(max_length=300)
     body = models.TextField()
     published_datetime = models.DateTimeField()
+    site_id = models.CharField(max_length=100)
     site = models.CharField(
         max_length=10,
         choices=Site.choices

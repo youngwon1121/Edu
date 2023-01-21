@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 from django.utils import timezone
 
 from crawlers.BBCCrawler import BBCCrawler
+from crawlers.crawler import crawler_factory
 
 
 class BBCCrawlerTest(TestCase):
@@ -40,7 +41,21 @@ class BBCCrawlerTest(TestCase):
         # when
         data = crawler._parse_detail(xml)
 
-        #then
+        # then
         self.assertEqual(data['title'], "Ukraine's interior ministry leadership killed in helicopter crash")
         self.assertEqual(data['published_datetime'].tzinfo, ZoneInfo('UTC'))
         self.assertTrue(timezone.is_aware(data['published_datetime']))
+
+    def test_to_site_id(self):
+        #given
+        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
+        url = 'https://www.bbc.co.uk/news/health-64354661?at_medium=RSS&at_campaign=KARANGA'
+
+        #when, then
+        self.assertEqual('/news/health-64354661', crawler.to_site_id(url))
+
+    def test_get_target_site_ids(self):
+        crawler = crawler_factory('http://feeds.bbci.co.uk/news/rss.xml')
+        site_ids: dict = crawler.get_target_site_ids()
+
+        print(crawler.get_target_site_ids())

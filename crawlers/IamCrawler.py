@@ -8,9 +8,11 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from crawlers.BaseCrawler import BaseCrawler
 
-class IamCrawler:
-    def __init__(self, url):
+
+class IamCrawler(BaseCrawler):
+    def __init__(self, url=None):
         self.url = url
         self.site = "IAM"
         options = webdriver.ChromeOptions()
@@ -20,31 +22,54 @@ class IamCrawler:
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    def get(self):
+    def get_post(self, urls: dict = None):
         json = self._get_json()
-        return self._get_details(json)
+
+        if urls is None:
+            return self._get_details(json)
+
+        new_json = {'articles': []}
+        for article in json['articles']:
+            if article['id'] in urls:
+                new_json['articles'].append(article)
+        return self._get_details(new_json)
+
+    def get_target_site_ids(self) -> dict:
+        json = self._get_json()
+
+        site_ids = dict()
+        for article in json['articles']:
+            site_ids[str(article['id'])] = article['view_link']
+        return site_ids
 
     def _get_json(self):
-        return requests.get(self._get_api_url()).json()
+        self.json = requests.get(self._get_api_url()).json()
+        return self.json
 
     def _get_api_url(self):
         url = urlparse(self.url)
-        return url._replace(path='/api/article'+url.path).geturl()
+        return url._replace(path='/api/article' + url.path).geturl()
 
     def _get_details(self, json):
         data = []
-        for article in json['articles'][:10]:
+        for article in json['articles']:
             url = article['view_link']
 
             self.driver.get(url)
             body = self.driver.find_element(by=By.ID, value="articleBody").get_attribute('innerHTML')
-            published_datetime = timezone.datetime.strptime(article['pub_date'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
+            published_datetime = timezone.datetime.strptime(article['pub_date'], '%Y-%m-%d %H:%M:%S').replace(
+                tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
+
+            file = []
+            if article['files'] is not None:
+                file = [file['title'] for file in article['files']]
             data.append({
                 'url': url,
                 'site': self.site,
+                'site_id': article['id'],
                 'title': article['title'],
                 'body': body,
                 'published_datetime': published_datetime,
-                'attachment_list': [file['title'] for file in article['files']]
+                'attachment_list': file
             })
         return data

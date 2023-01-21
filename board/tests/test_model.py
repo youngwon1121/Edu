@@ -6,6 +6,8 @@ from django.test import TestCase
 from board.models import Site, Post, Attachment
 from django.utils import timezone
 
+from board.views import duplicate_check
+
 
 class MyTestCase(TestCase):
     def test_create(self):
@@ -24,12 +26,11 @@ class MyTestCase(TestCase):
         a1.save()
         a2.save()
 
-        #then
+        # then
         p = Post.objects.get(id=1)
         self.assertEqual(p.id, 1)
         self.assertEqual(p.site, Site.IAM)
         self.assertEqual(p.attachment_set.count(), 2)
-
 
     def test_timezone2(self):
         bbc_time = "2023-01-18T14:00:28.000Z"
@@ -46,7 +47,6 @@ class MyTestCase(TestCase):
         t = timezone.datetime.strptime(naver_time, '%Y. %m. %d. %H:%M')
         print(t)
 
-
         # from django.utils.dateparse import parse_datetime
         # parse_datetime("2023-01-18T14:00:28.000Z")
 
@@ -54,14 +54,13 @@ class MyTestCase(TestCase):
         import pytz
         from django.utils.dateparse import parse_date
 
-        #naive
+        # naive
         repay_datetime = datetime.datetime.strptime('2016-10-01 14:00:00', '%Y-%m-%d %H:%M:%S')
         print(repay_datetime)
 
-        #aware
+        # aware
         repay_aware_datetime = timezone.make_aware(repay_datetime)
         print(repay_aware_datetime)
-
 
         print('-----')
         now = timezone.now()
@@ -69,8 +68,31 @@ class MyTestCase(TestCase):
 
         import NHNEdu.settings
         t_from = '20220801000000'
-        from_dt = datetime.datetime(year=int(t_from[:4]), month=int(t_from[4:6]), day=int(t_from[6:8]), hour=int(t_from[8:10]),
-                           minute=int(t_from[10:12]), second=int(t_from[12:14]))
+        from_dt = datetime.datetime(year=int(t_from[:4]), month=int(t_from[4:6]), day=int(t_from[6:8]),
+                                    hour=int(t_from[8:10]),
+                                    minute=int(t_from[10:12]), second=int(t_from[12:14]))
         print(from_dt)
 
+    def test_duplicate_check(self):
+        p1 = Post(
+            url="https://school.iamservice.net/organization/1674/group/2001892",
+            title="IAM1",
+            body="aa👏",
+            published_datetime=timezone.now(),
+            site=Site.IAM,
+            site_id="1234"
+        )
+        p1.save()
+        p2 = Post(
+            url="https://school.iamservice.net/organization/1674/group/2001892",
+            title="BBC1",
+            body="aa👏",
+            published_datetime=timezone.now(),
+            site=Site.IAM,
+            site_id="5678"
+        )
+        p2.save()
 
+        # 중복되는 id
+        result_set = duplicate_check(Site.IAM, ["1234", "2345", "3456", "4567", "5678"])
+        self.assertQuerysetEqual(result_set, [p1, p2], ordered=False)

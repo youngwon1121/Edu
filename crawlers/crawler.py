@@ -8,16 +8,11 @@ from crawlers.NaverBlogCrawler import NaverBlogCrawler
 def crawler_factory(url):
     parts = urlparse(url)
     if parts.netloc == "school.iamservice.net":
-        return IamCrawler
+        return IamCrawler(url)
     elif parts.netloc == "blog.naver.com":
-        return NaverBlogCrawler
+        return NaverBlogCrawler(url)
     elif parts.netloc == "feeds.bbci.co.uk":
-        return BBCCrawler
+        return BBCCrawler(url)
     else:
         return None
-
-
-def get_post(url):
-    crawler = crawler_factory(url)
-    return crawler(url=url).get()
 
