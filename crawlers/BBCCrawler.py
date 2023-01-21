@@ -17,7 +17,7 @@ class BBCCrawler(HtmlCrawler):
         soup = BeautifulSoup(xml, "xml")
         return [link.get_text() for link in soup.select('item > link') if "/news/" in link.get_text()][:10]
 
-    def _parse_detail(self, html):
+    def _parse_post(self, html):
         soup = BeautifulSoup(html, 'html.parser')
 
         title = soup.find("h1", id="main-heading").get_text(strip=True)

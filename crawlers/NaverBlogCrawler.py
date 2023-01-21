@@ -19,7 +19,7 @@ class NaverBlogCrawler(HtmlCrawler):
         soup = BeautifulSoup(html, 'html.parser')
         return ['https://blog.naver.com' + item['href'] for item in soup.select('.item .link')[:10]]
 
-    def _parse_detail(self, html):
+    def _parse_post(self, html):
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one(".se-title-text span").get_text(strip=True)
         body = soup.find(class_="se-main-container")

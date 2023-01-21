@@ -32,13 +32,13 @@ class NaverBlogCrawlerTest(TestCase):
                             'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222905628639&categoryNo=51&parentCategoryNo=&from=thumbnailList'])
 
 
-    def test_parse_detail(self):
+    def test_parse_post(self):
         # given
         crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
         html = open(self.path + "/resources/naverblog_detail.html").read()
 
         # when
-        data = crawler._parse_detail(html)
+        data = crawler._parse_post(html)
 
         # then
         self.assertEqual(data['title'], "[첨부파일] 수소차 관련주 (2030년까지 수소차 3만대 보급 , 수소 경제 정책 방향) 대창솔루션 / 평화홀딩스 / 대원강업 / 세종공업 / 평화산업")

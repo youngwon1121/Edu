@@ -33,13 +33,13 @@ class BBCCrawlerTest(TestCase):
                                 'https://www.bbc.co.uk/news/uk-politics-64318141?at_medium=RSS&at_campaign=KARANGA',
                                 'https://www.bbc.co.uk/news/uk-wales-64317360?at_medium=RSS&at_campaign=KARANGA'])
 
-    def test_parse_detail(self):
+    def test_parse_post(self):
         # given
         crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
         xml = open(self.path + "/resources/bbc_detail.html").read()
 
         # when
-        data = crawler._parse_detail(xml)
+        data = crawler._parse_post(xml)
 
         # then
         self.assertEqual(data['title'], "Ukraine's interior ministry leadership killed in helicopter crash")
