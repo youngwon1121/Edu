@@ -1,47 +1,21 @@
 import zoneinfo
-from urllib.parse import urlparse, parse_qsl
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
-from crawlers.BaseCrawler import BaseCrawler
+from crawlers.BaseCrawler import HtmlCrawler
 
 
-class BBCCrawler(BaseCrawler):
+class BBCCrawler(HtmlCrawler):
     def __init__(self, url):
         self.url = url
         self.site = "BBC"
 
-    def get_post(self, urls: dict = None):
-        if urls is None:
-            urls = self._get_links()
-        return self._get_details(urls.values())
-
-    def get_target_site_ids(self):
-        site_ids = dict()
-        for url in self._get_links():
-            site_ids[self.to_site_id(url)] = url
-        return site_ids
-
-    def _get_links(self):
-        response = requests.get("http://feeds.bbci.co.uk/news/rss.xml")
-        return self._parse_index(response.content)
-
     def _parse_index(self, xml):
         soup = BeautifulSoup(xml, "xml")
         return [link.get_text() for link in soup.select('item > link') if "/news/" in link.get_text()][:10]
-
-    def _get_details(self, urls):
-        data = []
-        for url in urls:
-            response = requests.get(url).content
-            parse_data = self._parse_detail(response)
-            parse_data['url'] = url
-            parse_data['site_id'] = self.to_site_id(url)
-            parse_data['site'] = self.site
-            data.append(parse_data)
-        return data
 
     def _parse_detail(self, html):
         soup = BeautifulSoup(html, 'html.parser')
