@@ -4,32 +4,44 @@ import requests
 
 
 class BaseCrawler(metaclass=ABCMeta):
+    def __init__(self, url):
+        self.request_data = {}
+        self.url = url
+        self.refresh_request_data()
+
     @abstractmethod
-    def get_posts(self, url=None):
+    def get_posts(self):
         pass
 
     @abstractmethod
-    def get_target_site_ids(self):
+    def refresh_request_data(self):
         pass
+
+    def get_request_ids(self):
+        return list(self.request_data.keys())
+
+    def get_request_datas(self):
+        return list(self.request_data.values())
+
+    def remove_request_data_by_id(self, post_id):
+        if post_id in self.request_data:
+            del self.request_data[post_id]
+            return True
+        else:
+            return False
 
 
 class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
     def __init__(self, url):
-        self.url = url
+        super().__init__(url)
         self.site = None
 
-    def get_posts(self, urls: dict = None):
-        if urls is None:
-            urls = self._get_urls()
-            return [self.get_posts(url) for url in urls]
+    def get_posts(self):
+        return [self._get_post(url) for url in self.request_data.values()]
 
-        return [self._get_post(url) for url in urls.values()]
-
-    def get_target_site_ids(self):
-        site_ids = dict()
+    def refresh_request_data(self):
         for url in self._get_urls():
-            site_ids[self.to_site_id(url)] = url
-        return site_ids
+            self.request_data[self.to_site_id(url)] = url
 
     def _get_urls(self):
         response = requests.get(self.url)
@@ -42,6 +54,7 @@ class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
         data['site_id'] = self.to_site_id(url)
         data['site'] = self.site
         return data
+
     @abstractmethod
     def _parse_index(self, html):
         pass

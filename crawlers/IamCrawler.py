@@ -12,8 +12,9 @@ from crawlers.BaseCrawler import BaseCrawler
 
 
 class IamCrawler(BaseCrawler):
+
     def __init__(self, url=None):
-        self.url = url
+        super().__init__(url)
         self.site = "IAM"
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
@@ -22,25 +23,16 @@ class IamCrawler(BaseCrawler):
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    def get_posts(self, urls: dict = None):
-        json = self._get_json()
-
-        if urls is None:
-            return [self._get_post(article) for article in json['articles']]
-
+    def get_posts(self):
         posts = []
-        for article in json['articles']:
-            if str(article['id']) in urls:
-                posts.append(self._get_post(article))
+        for article in self.request_data.values():
+            posts.append(self._get_post(article))
         return posts
 
-    def get_target_site_ids(self) -> dict:
+    def refresh_request_data(self):
         json = self._get_json()
-
-        site_ids = dict()
         for article in json['articles'][:10]:
-            site_ids[str(article['id'])] = article['view_link']
-        return site_ids
+            self.request_data[str(article['id'])] = article
 
     def _get_json(self):
         self.json = requests.get(self._get_api_url()).json()

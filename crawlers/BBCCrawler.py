@@ -10,7 +10,7 @@ from crawlers.BaseCrawler import HtmlCrawler
 
 class BBCCrawler(HtmlCrawler):
     def __init__(self, url):
-        self.url = url
+        super().__init__(url)
         self.site = "BBC"
 
     def _parse_index(self, xml):

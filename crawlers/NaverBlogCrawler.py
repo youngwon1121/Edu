@@ -12,7 +12,7 @@ from crawlers.BaseCrawler import HtmlCrawler
 
 class NaverBlogCrawler(HtmlCrawler):
     def __init__(self, url):
-        self.url = url
+        super().__init__(url)
         self.site = "NAVERBLOG"
 
     def _parse_index(self, html):

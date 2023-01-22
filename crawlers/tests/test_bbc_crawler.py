@@ -54,8 +54,11 @@ class BBCCrawlerTest(TestCase):
         #when, then
         self.assertEqual('/news/health-64354661', crawler.to_site_id(url))
 
-    def test_get_target_site_ids(self):
-        crawler = crawler_factory('http://feeds.bbci.co.uk/news/rss.xml')
-        site_ids: dict = crawler.get_target_site_ids()
+    def test_get_request_id(self):
+        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
+        ids = crawler.get_request_ids()
 
-        print(crawler.get_target_site_ids())
+        crawler.remove_request_data_by_id(ids[0])
+        self.assertEqual(9, len(crawler.get_request_ids()))
+
+
