@@ -1,5 +1,6 @@
 import json
 
+from django.db import transaction
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -9,6 +10,7 @@ from crawlers.crawler import crawler_factory
 
 
 @csrf_exempt
+@transaction.atomic
 def get(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -48,7 +50,7 @@ def get_post(url):
             att = Attachment(file_name=attachment, post=p)
             att.save()
 
-    return Post.objects.filter(site=crawler.site, site_id__in=request_ids)
+    return Post.objects.prefetch_related('attachment_list').filter(site=crawler.site, site_id__in=request_ids)
 
 
 def duplicate_check(site, site_ids):
