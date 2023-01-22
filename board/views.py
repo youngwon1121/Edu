@@ -1,23 +1,27 @@
-import json
-
 from django.db import transaction
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.request import Request
+from rest_framework.response import Response
 
 from board.models import Post, Attachment
 from board.serailizers import PostSerializer
 from crawlers.crawler import crawler_factory
 
 
-@csrf_exempt
+@api_view(['POST'])
 @transaction.atomic
-def get(request):
+def get(request: Request):
     if request.method == "POST":
-        data = json.loads(request.body)
+        if request.data.get('url') is None:
+            return Response({"message": "Field 'url' is empty"}, status=status.HTTP_400_BAD_REQUEST)
 
-        posts = get_post(data['url'])
+        posts = get_post(request.data['url'])
         serializer = PostSerializer(posts, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(
+            {'count': len(serializer.data), 'data': serializer.data},
+            status=status.HTTP_200_OK
+        )
 
 
 def get_post(url):
