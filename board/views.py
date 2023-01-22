@@ -1,9 +1,10 @@
 import json
 
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from board.models import Post, Attachment
+from board.serailizers import PostSerializer
 from crawlers.crawler import crawler_factory
 
 
@@ -12,8 +13,9 @@ def get(request):
     if request.method == "POST":
         data = json.loads(request.body)
 
-        parsed_data = get_post(data['url'])
-        return HttpResponse(parsed_data)
+        posts = get_post(data['url'])
+        serializer = PostSerializer(posts, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 def get_post(url):

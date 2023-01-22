@@ -23,7 +23,7 @@ class Post(models.Model):
 
 
 class Attachment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="attachment_list")
     file_name = models.CharField(max_length=300)
 
     def __str__(self):
