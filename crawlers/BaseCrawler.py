@@ -1,3 +1,4 @@
+import asyncio
 from abc import ABCMeta, abstractmethod
 
 import requests
@@ -37,7 +38,12 @@ class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
         self.site = None
 
     def get_posts(self):
-        return [self._get_post(url) for url in self.request_data.values()]
+        return asyncio.run(self._get_posts())
+
+    async def _get_posts(self):
+        futures = [asyncio.ensure_future(self._get_post(url)) for url in self.request_data.values()]
+        result = await asyncio.gather(*futures)
+        return result
 
     def refresh_request_data(self):
         for url in self._get_urls():
@@ -47,9 +53,10 @@ class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
         response = requests.get(self.url)
         return self._parse_index(response.content)
 
-    def _get_post(self, url):
-        response = requests.get(url).content
-        data = self._parse_post(response)
+    async def _get_post(self, url):
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(None, requests.get, url)
+        data = self._parse_post(response.content)
         data['url'] = url
         data['site_id'] = self.to_site_id(url)
         data['site'] = self.site
