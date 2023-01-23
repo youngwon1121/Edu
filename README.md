@@ -15,21 +15,24 @@ curl --location --request POST 'http://localhost:8000/boards/' \
 
 ```json
 # response
-[
+{
+  "count": 10,
+  "data": [
     {
-        "id": 497,
-        "url": "http://school.iamservice.net/articles/view/135836925",
-        "title": "2022년 겨울철 교육시설물 안전점검 실시 결과",
-        "body": "<p style=\"text-align: left;\">\n<br>\t\t\n<br>\t\t2022년 겨울철 학교시설물 안전점검 결과를 붙임과 같이 공개합니다.<br><br>붙임 2022년 겨울철 교육시설물 안전점검 실시 결과 1부.\n<br>\t\t\n<br>\t\t\n<br>\t\t\n<br>\t\t\n<br>\t\t\t<br></p>",
-        "published_datetime": "2022-12-27T00:00:00+09:00",
-        "site": "IAM",
-        "attachment_list": [
-            {
-                "file_name": "교육시설 안전점검 실시 결과(2022 겨울철).pdf"
-            }
-        ]
-    },
-]
+      "id": 497,
+      "url": "http://school.iamservice.net/articles/view/135836925",
+      "title": "2022년 겨울철 교육시설물 안전점검 실시 결과",
+      "body": "<p style=\"text-align: left;\">\n<br>\t\t\n<br>\t\t2022년 겨울철 학교시설물 안전점검 결과를 붙임과 같이 공개합니다.<br><br>붙임 2022년 겨울철 교육시설물 안전점검 실시 결과 1부.</p>",
+      "published_datetime": "2022-12-27T00:00:00+09:00",
+      "site": "IAM",
+      "attachment_list": [
+        {
+          "file_name": "교육시설 안전점검 실시 결과(2022 겨울철).pdf"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ## 지원되는 URL 
@@ -41,12 +44,51 @@ curl --location --request POST 'http://localhost:8000/boards/' \
 
 - 네이버 블로그 
   - https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51
+  - querystring에 blogId가 포함된 형태만 지원.
 
 - 아이엠스쿨 기관 프로필
   - https://school.iamservice.net/organization/1674
   - https://school.iamservice.net/organization/1674/group/2001892
 
 
+
+## 크롤링 방법
+
+#### 네이버블로그
+
+1. 각 게시물의 id로 추정되는 logNo들을 포함하는 api로 json요청
+
+path: PostTitleListAsync.naver
+
+query : blogId, categoryNo(optional), currentPage, countPerPage
+
+Ex) https://blog.naver.com/PostTitleListAsync.nhn?blogId=hellopolicy&from=postList&categoryNo=168&currentPage=1&countPerPage=1
+
+2. 각 게시물의  html수집
+
+path: PostView.naver
+
+query : blogId, categoryNo(optional), logNo 
+
+Ex) https://blog.naver.com/PostView.naver?blogId=hellopolicy&from=postList&categoryNo=168&logNo=222989752607
+
+----
+
+#### 아이엠스쿨 기관 프로필
+
+1. 각 게시물의 id가 있는 api를 통해 json요청
+
+기존 Path: https://school.iamservice.net/organization/1674
+
+변경 Path: https://school.iamservice.net/api/article/organization/1674
+
+2. response로 받은 json의 view_link  property를 통해 각 게시물 html 수집
+
+본문이 동적으로 js render되기 때문에 webdriver사용.
+
+#### BBC feeds
+
+- http://feeds.bbci.co.uk/news/rss.xml 페이지에서 게시물 url탐색 후 수집
 
 
 
