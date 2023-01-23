@@ -6,20 +6,19 @@ from zoneinfo import ZoneInfo
 from django.utils import timezone
 
 from crawlers.BBCCrawler import BBCCrawler
-from crawlers.crawler import crawler_factory
 
 
 class BBCCrawlerTest(TestCase):
     def setUp(self) -> None:
         self.path = os.path.dirname(__file__)
+        self.crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
 
     def test_parse_index(self):
         # given
-        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
         xml = open(self.path + "/resources/bbc.xml").read()
 
         # when
-        urls = crawler._parse_index(xml)
+        urls = self.crawler._parse_index(xml)
 
         # then
         self.assertEqual(urls, ['https://www.bbc.co.uk/news/world-europe-64315594?at_medium=RSS&at_campaign=KARANGA',
@@ -35,11 +34,10 @@ class BBCCrawlerTest(TestCase):
 
     def test_parse_post(self):
         # given
-        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
         xml = open(self.path + "/resources/bbc_detail.html").read()
 
         # when
-        data = crawler._parse_post(xml)
+        data = self.crawler._parse_post(xml)
 
         # then
         self.assertEqual(data['title'], "Ukraine's interior ministry leadership killed in helicopter crash")
@@ -48,17 +46,15 @@ class BBCCrawlerTest(TestCase):
 
     def test_to_site_id(self):
         #given
-        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
         url = 'https://www.bbc.co.uk/news/health-64354661?at_medium=RSS&at_campaign=KARANGA'
 
         #when, then
-        self.assertEqual('/news/health-64354661', crawler.to_site_id(url))
+        self.assertEqual('/news/health-64354661', self.crawler.to_site_id(url))
 
     def test_get_request_id(self):
-        crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
-        ids = crawler.get_request_ids()
+        ids = self.crawler.get_request_ids()
 
-        crawler.remove_request_data_by_id(ids[0])
-        self.assertEqual(9, len(crawler.get_request_ids()))
+        self.crawler.remove_request_data_by_id(ids[0])
+        self.assertEqual(9, len(self.crawler.get_request_ids()))
 
 

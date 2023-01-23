@@ -12,13 +12,13 @@ from crawlers.NaverBlogCrawler import NaverBlogCrawler
 class NaverBlogCrawlerTest(TestCase):
     def setUp(self) -> None:
         self.path = os.path.dirname(__file__)
+        self.crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
     def test_parse_index(self):
         # given
-        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
         html = open(self.path + "/resources/naverblog.html").read()
 
         # when
-        urls = crawler._parse_index(html)
+        urls = self.crawler._parse_index(html)
         # then
         self.assertListEqual(urls, ['https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222963700172&categoryNo=51&parentCategoryNo=&from=thumbnailList',
                             'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222955502301&categoryNo=51&parentCategoryNo=&from=thumbnailList',
@@ -34,11 +34,10 @@ class NaverBlogCrawlerTest(TestCase):
 
     def test_parse_post(self):
         # given
-        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
         html = open(self.path + "/resources/naverblog_detail.html").read()
 
         # when
-        data = crawler._parse_post(html)
+        data = self.crawler._parse_post(html)
 
         # then
         self.assertEqual(data['title'], "[첨부파일] 수소차 관련주 (2030년까지 수소차 3만대 보급 , 수소 경제 정책 방향) 대창솔루션 / 평화홀딩스 / 대원강업 / 세종공업 / 평화산업")
@@ -55,11 +54,10 @@ class NaverBlogCrawlerTest(TestCase):
     def test_parse_time(self):
         # given
         times = ["5분 전", "58분 전", "1시간 전", "11시간 전"]
-        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
 
         #when
         for time in times:
-            crawler._parse_datetime(time)
+            self.crawler._parse_datetime(time)
 
     def test_create_site_id(self):
         #given
@@ -67,7 +65,5 @@ class NaverBlogCrawlerTest(TestCase):
             'https://blog.naver.com/PostView.naver?blogId=hellopolicy&logNo=222989752607&categoryNo=168&parentCategoryNo=&from=thumbnailList',
             'https://blog.naver.com/PostView.naver?blogId=hellopolicy&logNo=222930899202&categoryNo=168&parentCategoryNo=&from=thumbnailList']
 
-        crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
-
         # when then
-        self.assertEqual('blogId=hellopolicy&logNo=222989752607', crawler.to_site_id(urls[0]))
+        self.assertEqual('blogId=hellopolicy&logNo=222989752607', self.crawler.to_site_id(urls[0]))
