@@ -6,7 +6,7 @@ from django.test import TestCase
 from board.models import Site, Post, Attachment
 from django.utils import timezone
 
-from board.views import duplicate_check
+from board.services import duplicate_check
 
 
 class MyTestCase(TestCase):
@@ -27,10 +27,9 @@ class MyTestCase(TestCase):
         a2.save()
 
         # then
-        p = Post.objects.get(id=1)
         self.assertEqual(p.id, 1)
         self.assertEqual(p.site, Site.IAM)
-        self.assertEqual(p.attachment_set.count(), 2)
+        self.assertEqual(p.attachment_list.count(), 2)
 
     def test_duplicate_check(self):
         p1 = Post(
