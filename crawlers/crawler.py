@@ -3,16 +3,16 @@ from urllib.parse import urlparse
 from crawlers.BBCCrawler import BBCCrawler
 from crawlers.IamCrawler import IamCrawler
 from crawlers.NaverBlogCrawler import NaverBlogCrawler
+from crawlers.exceptions import UnsupportedURL
 
 
 def crawler_factory(url):
-    parts = urlparse(url)
-    if parts.netloc == "school.iamservice.net":
+    if "school.iamservice.net" in url:
         return IamCrawler(url)
-    elif parts.netloc == "blog.naver.com":
+    elif "blog.naver.com" in url:
         return NaverBlogCrawler(url)
-    elif parts.netloc == "feeds.bbci.co.uk":
+    elif "feeds.bbci.co.uk" in url:
         return BBCCrawler(url)
     else:
-        return None
+        raise UnsupportedURL(url)
 
