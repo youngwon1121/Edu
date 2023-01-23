@@ -13,23 +13,20 @@ class NaverBlogCrawlerTest(TestCase):
     def setUp(self) -> None:
         self.path = os.path.dirname(__file__)
         self.crawler = NaverBlogCrawler("https://blog.naver.com/PostList.nhn?blogId=sntjdska123&from=postList&categoryNo=51")
+
+    def test_get_listing_url(self):
+        url = self.crawler.get_listing_url()
+        self.assertEqual("https://blog.naver.com/PostTitleListAsync.naver?blogId=sntjdska123&from=postList&categoryNo=51&currentPage=1&countPerPage=10", url)
+
     def test_parse_index(self):
         # given
-        html = open(self.path + "/resources/naverblog.html").read()
+        json = open(self.path + "/resources/naverblog.json").read()
 
         # when
-        urls = self.crawler._parse_index(html)
+        urls = self.crawler._parse_index(json)
         # then
-        self.assertListEqual(urls, ['https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222963700172&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222955502301&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222949678768&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222944086832&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222937982636&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222931998560&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222925815575&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222919333056&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222913062487&categoryNo=51&parentCategoryNo=&from=thumbnailList',
-                            'https://blog.naver.com/PostView.naver?blogId=sntjdska123&logNo=222905628639&categoryNo=51&parentCategoryNo=&from=thumbnailList'])
+        self.assertEqual('https://blog.naver.com/PostView.nhn?blogId=sntjdska123&from=postList&categoryNo=51&logNo=222991430176',
+                         urls[0])
 
 
     def test_parse_post(self):

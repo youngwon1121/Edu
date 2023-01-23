@@ -1,7 +1,8 @@
+import json
 import re
 import zoneinfo
 from datetime import timedelta
-from urllib.parse import urlparse, parse_qsl
+from urllib.parse import urlparse, parse_qsl, unquote
 
 import requests
 from bs4 import BeautifulSoup
@@ -12,12 +13,23 @@ from crawlers.BaseCrawler import HtmlCrawler
 
 class NaverBlogCrawler(HtmlCrawler):
     def __init__(self, url):
-        super().__init__(url)
         self.site = "NAVERBLOG"
+        self.parsed_url = urlparse(url)
 
-    def _parse_index(self, html):
-        soup = BeautifulSoup(html, 'html.parser')
-        return ['https://blog.naver.com' + item['href'] for item in soup.select('.item .link')[:10]]
+        super().__init__(url)
+
+    def _parse_index(self, data):
+        urls = []
+
+        url = self.parsed_url
+        data = unquote(data).replace("\\", "").replace("\'", "")
+        data = json.loads(data, strict=False)
+        query = dict(parse_qsl(self.parsed_url.query))
+        for post_data in data['postList'][:10]:
+            query['logNo'] = post_data['logNo']
+            q = "&".join([f"{k}={v}" for k, v in query.items()])
+            urls.append(url._replace(path='/PostView.nhn', query=q).geturl())
+        return urls
 
     def _parse_post(self, html):
         soup = BeautifulSoup(html, 'html.parser')
@@ -50,3 +62,10 @@ class NaverBlogCrawler(HtmlCrawler):
 
         else:
             return timezone.datetime.strptime(dt, '%Y. %m. %d. %H:%M').replace(tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
+
+    def get_listing_url(self):
+        query = dict(parse_qsl(self.parsed_url.query))
+        query['currentPage'] = '1'
+        query['countPerPage'] = '10'
+        query = "&".join([f"{k}={v}" for k, v in query.items()])
+        return self.parsed_url._replace(path='/PostTitleListAsync.naver', query=query).geturl()
