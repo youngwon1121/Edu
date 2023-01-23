@@ -5,10 +5,10 @@ import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
-from crawlers.BaseCrawler import HtmlCrawler
+from crawlers.BaseCrawler import RequestCrawler
 
 
-class BBCCrawler(HtmlCrawler):
+class BBCCrawler(RequestCrawler):
 
     def __init__(self, url):
         super().__init__(url)

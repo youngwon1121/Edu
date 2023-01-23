@@ -8,10 +8,10 @@ import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
-from crawlers.BaseCrawler import HtmlCrawler
+from crawlers.BaseCrawler import RequestCrawler
 
 
-class NaverBlogCrawler(HtmlCrawler):
+class NaverBlogCrawler(RequestCrawler):
     def __init__(self, url):
         self.site = "NAVERBLOG"
         self.parsed_url = urlparse(url)

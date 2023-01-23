@@ -32,7 +32,7 @@ class BaseCrawler(metaclass=ABCMeta):
             return False
 
 
-class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
+class RequestCrawler(BaseCrawler, metaclass=ABCMeta):
     site = None
 
     def __init__(self, url):
@@ -42,7 +42,7 @@ class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
         return asyncio.run(self._get_posts_async())
 
     async def _get_posts_async(self):
-        futures = [asyncio.ensure_future(self._get_post(url)) for url in self.request_data.values()]
+        futures = [asyncio.ensure_future(self._fetch_post(url)) for url in self.request_data.values()]
         result = await asyncio.gather(*futures)
         return result
 
@@ -50,17 +50,17 @@ class HtmlCrawler(BaseCrawler, metaclass=ABCMeta):
         """
             {게시물 unique key: 게시물 URL}을 내부에 저장
         """
-        for url in self._get_post_urls():
+        for url in self._fetch_post_urls():
             self.request_data[self.to_site_id(url)] = url
 
-    def _get_post_urls(self):
+    def _fetch_post_urls(self):
         """
             index페이지에서 게시물들의 URL을 가져온다
         """
         response = requests.get(self.get_listing_url())
         return self._parse_index(response.content)
 
-    async def _get_post(self, url):
+    async def _fetch_post(self, url):
         """
             각각의 게시물을 가져온다
         """

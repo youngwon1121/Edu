@@ -31,7 +31,7 @@ class IamCrawlerTest(TestCase):
         response = json.loads(data)
 
         # when
-        post = self.crawler._get_post(response['articles'][0])
+        post = self.crawler._fetch_post(response['articles'][0])
 
         # then
         self.assertEqual("2023학년도 교과서 목록", post['title'])

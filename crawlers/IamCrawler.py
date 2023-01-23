@@ -26,15 +26,15 @@ class IamCrawler(BaseCrawler):
     def get_posts(self):
         posts = []
         for article in self.request_data.values():
-            posts.append(self._get_post(article))
+            posts.append(self._fetch_post(article))
         return posts
 
     def refresh_request_data(self):
-        json = self._get_json()
+        json = self._fetch_json()
         for article in json['articles'][:10]:
             self.request_data[str(article['id'])] = article
 
-    def _get_json(self):
+    def _fetch_json(self):
         self.json = requests.get(self._get_api_url()).json()
         return self.json
 
@@ -42,7 +42,7 @@ class IamCrawler(BaseCrawler):
         url = urlparse(self.url)
         return url._replace(path='/api/article' + url.path).geturl()
 
-    def _get_post(self, article: dict):
+    def _fetch_post(self, article: dict):
         url = article['view_link']
         self.driver.get(url)
         body = self.driver.find_element(by=By.ID, value="articleBody").get_attribute('innerHTML')
