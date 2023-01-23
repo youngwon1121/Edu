@@ -46,7 +46,7 @@ class IamCrawler(BaseCrawler):
         url = article['view_link']
         self.driver.get(url)
         body = self.driver.find_element(by=By.ID, value="articleBody").get_attribute('innerHTML')
-        published_datetime = timezone.datetime.strptime(article['pub_date'], '%Y-%m-%d %H:%M:%S').replace(
+        published_datetime = timezone.datetime.strptime(article['reg_date'], '%Y-%m-%d %H:%M:%S').replace(
             tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
 
         file = []
