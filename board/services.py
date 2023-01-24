@@ -36,7 +36,9 @@ def get_post(url):
     Post.objects.bulk_create(post_list)
     Attachment.objects.bulk_create(attachments_list)
 
-    return Post.objects.prefetch_related('attachment_list').filter(site=crawler.site, site_id__in=request_ids)
+    return Post.objects.prefetch_related('attachment_list')\
+        .filter(site=crawler.site, site_id__in=request_ids)\
+        .order_by('-published_datetime')
 
 
 def duplicate_check(site, site_ids):
