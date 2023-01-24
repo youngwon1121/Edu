@@ -1,3 +1,4 @@
+import datetime
 import zoneinfo
 from urllib.parse import urlparse
 
@@ -16,7 +17,9 @@ class BBCCrawler(RequestCrawler):
 
     def _parse_index(self, xml):
         soup = BeautifulSoup(xml, "xml")
-        return [link.get_text() for link in soup.select('item > link') if "/news/" in link.get_text()][:10]
+        items = [item for item in soup.select('item') if "/news/" in item.get_text()]
+        items.sort(key=lambda i: datetime.datetime.strptime(i.select_one("pubDate").get_text(), "%a, %d %b %Y %H:%M:%S %Z"), reverse=True)
+        return [item.select_one('guid').get_text() for item in items][:10]
 
     def _parse_post(self, html):
         soup = BeautifulSoup(html, 'html.parser')

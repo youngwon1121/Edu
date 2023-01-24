@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.test import TestCase
@@ -19,18 +20,17 @@ class BBCCrawlerTest(TestCase):
 
         # when
         urls = self.crawler._parse_index(xml)
-
         # then
-        self.assertEqual(urls, ['https://www.bbc.co.uk/news/world-europe-64315594?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-64304500?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-64319133?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-64315384?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/world-europe-64314673?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/health-64308935?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/business-64315925?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-england-hereford-worcester-64235272?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-politics-64318141?at_medium=RSS&at_campaign=KARANGA',
-                                'https://www.bbc.co.uk/news/uk-wales-64317360?at_medium=RSS&at_campaign=KARANGA'])
+        self.assertEqual(urls, ['https://www.bbc.co.uk/news/business-64315925',
+                                'https://www.bbc.co.uk/news/uk-64319133',
+                                'https://www.bbc.co.uk/news/uk-england-hereford-worcester-64235272',
+                                'https://www.bbc.co.uk/news/health-64308935',
+                                'https://www.bbc.co.uk/news/uk-wales-64317360',
+                                'https://www.bbc.co.uk/news/world-europe-64315594',
+                                'https://www.bbc.co.uk/news/uk-64315384',
+                                'https://www.bbc.co.uk/news/uk-politics-64318141',
+                                'https://www.bbc.co.uk/news/uk-64304500',
+                                'https://www.bbc.co.uk/news/business-55992592'])
 
     def test_parse_post(self):
         # given
@@ -56,5 +56,4 @@ class BBCCrawlerTest(TestCase):
 
         self.crawler.remove_request_data_by_id(ids[0])
         self.assertEqual(9, len(self.crawler.get_request_ids()))
-
 
