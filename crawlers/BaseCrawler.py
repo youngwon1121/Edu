@@ -8,7 +8,6 @@ class BaseCrawler(metaclass=ABCMeta):
     def __init__(self, url):
         self.request_data = {}
         self.url = url
-        self.refresh_request_data()
 
     @abstractmethod
     def get_posts(self):

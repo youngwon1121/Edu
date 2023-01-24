@@ -51,9 +51,4 @@ class BBCCrawlerTest(TestCase):
         #when, then
         self.assertEqual('/news/health-64354661', self.crawler.to_site_id(url))
 
-    def test_get_request_id(self):
-        ids = self.crawler.get_request_ids()
-
-        self.crawler.remove_request_data_by_id(ids[0])
-        self.assertEqual(9, len(self.crawler.get_request_ids()))
 

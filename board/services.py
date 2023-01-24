@@ -5,6 +5,7 @@ from crawlers.crawler import crawler_factory
 def get_post(url):
     crawler = crawler_factory(url)
 
+    crawler.refresh_request_data()
     request_ids = crawler.get_request_ids()
 
     # 중복 post 체크
