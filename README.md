@@ -1,5 +1,13 @@
 # 게시물 크롤러
 
+## Specifications
+
+Language: python3.9
+
+Framework: django, django-rest-framework
+
+Storage: mariadb
+
 ## Request, Response
 
 ```
