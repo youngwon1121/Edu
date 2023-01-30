@@ -1,5 +1,6 @@
 import json
 import zoneinfo
+from typing import List
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
@@ -8,7 +9,7 @@ from django.utils import timezone
 from crawlers.BaseCrawler import RequestCrawler
 
 
-class IamCrawler(RequestCrawler):
+class IamCrawler(RequestCrawler[dict]):
     def __init__(self, url=None):
         super().__init__(url)
         self.site = "IAM"
@@ -17,11 +18,11 @@ class IamCrawler(RequestCrawler):
         url = urlparse(self.url)
         return url._replace(path='/api/article' + url.path).geturl()
 
-    def _parse_index(self, json_data):
+    def _parse_index(self, json_data) -> List[dict]:
         json_data = json.loads(json_data)
         return json_data['articles'][:10]
 
-    def _parse_post(self, html, data):
+    def _parse_post(self, html, data: dict):
         article = data
         soup = BeautifulSoup(html, 'html.parser')
 
@@ -31,7 +32,7 @@ class IamCrawler(RequestCrawler):
         start_index = js.find(start) + len(start)
         end_index = js.find(end)
         content = str(json.loads(js[start_index:end_index]))
-        
+
         published_datetime = timezone.datetime.strptime(article['reg_date'], '%Y-%m-%d %H:%M:%S').replace(
             tzinfo=zoneinfo.ZoneInfo("Asia/Seoul"))
 
@@ -48,8 +49,8 @@ class IamCrawler(RequestCrawler):
             'attachment_list': file
         }
 
-    def site_id_from_data(self, data):
+    def site_id_from_data(self, data: dict):
         return data['id']
 
-    def url_from_data(self, data):
+    def url_from_data(self, data: dict):
         return data['view_link']

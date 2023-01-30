@@ -1,12 +1,15 @@
 import asyncio
 from abc import ABCMeta, abstractmethod
+from typing import TypeVar, Generic, Dict, List
 
 import requests
 
+T = TypeVar("T")
 
-class BaseCrawler(metaclass=ABCMeta):
+
+class BaseCrawler(Generic[T], metaclass=ABCMeta):
     def __init__(self, url):
-        self.request_data = {}
+        self.request_data: Dict[str, T] = {}
         self.url = url
 
     @abstractmethod
@@ -17,10 +20,10 @@ class BaseCrawler(metaclass=ABCMeta):
     def refresh_request_data(self):
         pass
 
-    def get_request_ids(self):
+    def get_request_ids(self) -> List[str]:
         return list(self.request_data.keys())
 
-    def get_request_datas(self):
+    def get_request_datas(self) -> List[T]:
         return list(self.request_data.values())
 
     def remove_request_data_by_id(self, post_id):
@@ -31,7 +34,7 @@ class BaseCrawler(metaclass=ABCMeta):
             return False
 
 
-class RequestCrawler(BaseCrawler, metaclass=ABCMeta):
+class RequestCrawler(BaseCrawler[T], metaclass=ABCMeta):
     site = None
 
     def __init__(self, url):
@@ -77,7 +80,7 @@ class RequestCrawler(BaseCrawler, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def _parse_index(self, html):
+    def _parse_index(self, html) -> List[T]:
         pass
 
     @abstractmethod
@@ -88,5 +91,6 @@ class RequestCrawler(BaseCrawler, metaclass=ABCMeta):
     def site_id_from_data(self, data):
         pass
 
+    @abstractmethod
     def url_from_data(self, data):
-        return data
+        pass

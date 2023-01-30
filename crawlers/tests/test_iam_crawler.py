@@ -21,15 +21,14 @@ class IamCrawlerTest(TestCase):
         self.assertEqual(url, "https://school.iamservice.net/api/article/organization/19710/group/2091428")
 
     def test_parse_index(self):
-        #given
+        # given
         data = json.loads(self.data)
 
-        #when
+        # when
         articles = self.crawler._parse_index(self.data)
 
-        #then
+        # then
         self.assertListEqual(data['articles'][:10], articles)
-
 
     def test_parse_post(self):
         # given
