@@ -63,4 +63,4 @@ class NaverBlogCrawlerTest(TestCase):
             'https://blog.naver.com/PostView.naver?blogId=hellopolicy&logNo=222930899202&categoryNo=168&parentCategoryNo=&from=thumbnailList']
 
         # when then
-        self.assertEqual('blogId=hellopolicy&logNo=222989752607', self.crawler.to_site_id(urls[0]))
+        self.assertEqual('blogId=hellopolicy&logNo=222989752607', self.crawler.site_id_from_data(urls[0]))

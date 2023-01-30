@@ -21,9 +21,8 @@ class BBCCrawler(RequestCrawler):
         items.sort(key=lambda i: datetime.datetime.strptime(i.select_one("pubDate").get_text(), "%a, %d %b %Y %H:%M:%S %Z"), reverse=True)
         return [item.select_one('guid').get_text() for item in items][:10]
 
-    def _parse_post(self, html):
+    def _parse_post(self, html, data=None):
         soup = BeautifulSoup(html, 'html.parser')
-
         title = soup.find("h1", id="main-heading").get_text(strip=True)
         body = "".join(map(str, soup.select("article > div")))
 
@@ -37,9 +36,9 @@ class BBCCrawler(RequestCrawler):
             'attachment_list': []
         }
 
-    def to_site_id(self, url):
-        url = urlparse(url)
-        return url.path
+    def site_id_from_data(self, data):
+        data = urlparse(data)
+        return data.path
 
     def get_listing_url(self):
         return self.url

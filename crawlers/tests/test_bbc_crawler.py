@@ -44,11 +44,11 @@ class BBCCrawlerTest(TestCase):
         self.assertEqual(data['published_datetime'].tzinfo, ZoneInfo('UTC'))
         self.assertTrue(timezone.is_aware(data['published_datetime']))
 
-    def test_to_site_id(self):
+    def test_site_id_from_data(self):
         #given
         url = 'https://www.bbc.co.uk/news/health-64354661?at_medium=RSS&at_campaign=KARANGA'
 
         #when, then
-        self.assertEqual('/news/health-64354661', self.crawler.to_site_id(url))
+        self.assertEqual('/news/health-64354661', self.crawler.site_id_from_data(url))
 
 

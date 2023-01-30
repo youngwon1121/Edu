@@ -31,7 +31,7 @@ class NaverBlogCrawler(RequestCrawler):
             urls.append(url._replace(path='/PostView.nhn', query=q).geturl())
         return urls
 
-    def _parse_post(self, html):
+    def _parse_post(self, html, data=None):
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one(".se-title-text span").get_text(strip=True)
         body = soup.find(class_="se-main-container")
@@ -45,12 +45,12 @@ class NaverBlogCrawler(RequestCrawler):
             'attachment_list': attachment_list
         }
 
-    def to_site_id(self, url):
+    def site_id_from_data(self, data):
         """
         url로 부터 unique한 siteid 생성
         """
-        url = urlparse(url)
-        query = dict(parse_qsl(url.query))
+        data = urlparse(data)
+        query = dict(parse_qsl(data.query))
         return 'blogId=' + str(query.get('blogId')) + "&" + 'logNo=' + str(query.get('logNo'))
 
     def _parse_datetime(self, dt):
