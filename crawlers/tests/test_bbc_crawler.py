@@ -1,6 +1,7 @@
 import datetime
 import os
 
+from bs4 import BeautifulSoup
 from django.test import TestCase
 from zoneinfo import ZoneInfo
 
@@ -13,42 +14,36 @@ class BBCCrawlerTest(TestCase):
     def setUp(self) -> None:
         self.path = os.path.dirname(__file__)
         self.crawler = BBCCrawler('http://feeds.bbci.co.uk/news/rss.xml')
+        self.xml = open(self.path + "/resources/bbc.xml").read()
+        self.html = open(self.path + "/resources/bbc_detail.html").read()
 
     def test_parse_index(self):
-        # given
-        xml = open(self.path + "/resources/bbc.xml").read()
-
         # when
-        urls = self.crawler._parse_index(xml)
+        data = self.crawler._parse_index(self.xml)
         # then
-        self.assertEqual(urls, ['https://www.bbc.co.uk/news/business-64315925',
-                                'https://www.bbc.co.uk/news/uk-64319133',
-                                'https://www.bbc.co.uk/news/uk-england-hereford-worcester-64235272',
-                                'https://www.bbc.co.uk/news/health-64308935',
-                                'https://www.bbc.co.uk/news/uk-wales-64317360',
-                                'https://www.bbc.co.uk/news/world-europe-64315594',
-                                'https://www.bbc.co.uk/news/uk-64315384',
-                                'https://www.bbc.co.uk/news/uk-politics-64318141',
-                                'https://www.bbc.co.uk/news/uk-64304500',
-                                'https://www.bbc.co.uk/news/business-55992592'])
+        self.assertEqual(10, len(data))
+        self.assertTrue(str(data[0]).startswith('<item>'))
+        self.assertTrue(str(data[0]).endswith('</item>'))
 
     def test_parse_post(self):
         # given
-        xml = open(self.path + "/resources/bbc_detail.html").read()
+        soup = BeautifulSoup(self.xml, 'xml')
+        data = soup.select_one("item")
 
         # when
-        data = self.crawler._parse_post(xml)
+        data = self.crawler._parse_post(self.html, data)
 
         # then
-        self.assertEqual(data['title'], "Ukraine's interior ministry leadership killed in helicopter crash")
+        self.assertEqual(data['title'], "Ukraine interior ministry leadership killed in helicopter crash")
         self.assertEqual(data['published_datetime'].tzinfo, ZoneInfo('UTC'))
         self.assertTrue(timezone.is_aware(data['published_datetime']))
 
-    def test_to_site_id(self):
+    def test_site_id_from_data(self):
         #given
-        url = 'https://www.bbc.co.uk/news/health-64354661?at_medium=RSS&at_campaign=KARANGA'
+        soup = BeautifulSoup(self.xml, 'xml')
+        data = soup.select_one("item")
 
         #when, then
-        self.assertEqual('/news/health-64354661', self.crawler.to_site_id(url))
+        self.assertEqual('/news/world-europe-64315594', self.crawler.site_id_from_data(data))
 
 

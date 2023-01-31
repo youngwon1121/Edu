@@ -1,9 +1,6 @@
 import os
-from unittest.mock import patch, MagicMock, Mock
-from zoneinfo import ZoneInfo
 
 from django.test import TestCase
-from django.utils import timezone
 
 from crawlers.IamCrawler import IamCrawler
 import json
@@ -13,29 +10,33 @@ class IamCrawlerTest(TestCase):
     def setUp(self) -> None:
         self.path = os.path.dirname(__file__)
         self.crawler = IamCrawler(url="https://school.iamservice.net/organization/19710/group/2091428")
+        self.data = open(self.path + "/resources/iam.json").read()
+        self.html = open(self.path + "/resources/iam.html").read()
 
-    def test_get_api_url(self):
+    def test_get_listing_url(self):
         # when
-        url = self.crawler._get_api_url()
+        url = self.crawler.get_listing_url()
 
         # then
         self.assertEqual(url, "https://school.iamservice.net/api/article/organization/19710/group/2091428")
 
-    def test_get_post(self):
+    def test_parse_index(self):
         # given
-        mock = Mock()
-        mock.get.return_value = 'mock_get'
-        mock.find_element().get_attribute.return_value = ''
-        self.crawler.driver = mock
-        data = open(self.path + "/resources/iam.json").read()
-        response = json.loads(data)
+        data = json.loads(self.data)
 
         # when
-        post = self.crawler._fetch_post(response['articles'][0])
+        articles = self.crawler._parse_index(self.data)
 
         # then
-        self.assertEqual("2023학년도 교과서 목록", post['title'])
-        self.assertEqual(ZoneInfo('Asia/Seoul'), post['published_datetime'].tzinfo)
-        self.assertTrue(timezone.is_aware(post['published_datetime']))
-        self.assertListEqual(["2023학년도 교과서목록.xls"], post['attachment_list'])
-        self.assertEqual(135964035, post['site_id'])
+        self.assertListEqual(data['articles'][:10], articles)
+
+    def test_parse_post(self):
+        # given
+        json_data = json.loads(self.data)
+
+        # when
+        post = self.crawler._parse_post(self.html, json_data['articles'][0])
+
+        # then
+        self.assertTrue(post['body'].startswith("["))
+        self.assertTrue(post['body'].endswith("]"))

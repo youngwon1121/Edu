@@ -2,23 +2,23 @@ import json
 import re
 import zoneinfo
 from datetime import timedelta
+from typing import List
 from urllib.parse import urlparse, parse_qsl, unquote
 
-import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
 from crawlers.BaseCrawler import RequestCrawler
 
 
-class NaverBlogCrawler(RequestCrawler):
+class NaverBlogCrawler(RequestCrawler[str]):
+
     def __init__(self, url):
+        super().__init__(url)
         self.site = "NAVERBLOG"
         self.parsed_url = urlparse(url)
 
-        super().__init__(url)
-
-    def _parse_index(self, data):
+    def _parse_index(self, data) -> List[str]:
         urls = []
 
         url = self.parsed_url
@@ -28,10 +28,10 @@ class NaverBlogCrawler(RequestCrawler):
         for post_data in data['postList'][:10]:
             query['logNo'] = post_data['logNo']
             q = "&".join([f"{k}={v}" for k, v in query.items()])
-            urls.append(url._replace(path='/PostView.nhn', query=q).geturl())
+            urls.append(str(url._replace(path='/PostView.nhn', query=q).geturl()))
         return urls
 
-    def _parse_post(self, html):
+    def _parse_post(self, html, data: str):
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one(".se-title-text span").get_text(strip=True)
         body = soup.find(class_="se-main-container")
@@ -45,12 +45,12 @@ class NaverBlogCrawler(RequestCrawler):
             'attachment_list': attachment_list
         }
 
-    def to_site_id(self, url):
+    def site_id_from_data(self, data) -> str:
         """
         url로 부터 unique한 siteid 생성
         """
-        url = urlparse(url)
-        query = dict(parse_qsl(url.query))
+        data = urlparse(data)
+        query = dict(parse_qsl(data.query))
         return 'blogId=' + str(query.get('blogId')) + "&" + 'logNo=' + str(query.get('logNo'))
 
     def _parse_datetime(self, dt):
@@ -69,3 +69,6 @@ class NaverBlogCrawler(RequestCrawler):
         query['countPerPage'] = '10'
         query = "&".join([f"{k}={v}" for k, v in query.items()])
         return self.parsed_url._replace(path='/PostTitleListAsync.naver', query=query).geturl()
+
+    def url_from_data(self, data: str):
+        return data

@@ -1,12 +1,13 @@
 from urllib.parse import urlparse
 
+from crawlers import BaseCrawler
 from crawlers.BBCCrawler import BBCCrawler
 from crawlers.IamCrawler import IamCrawler
 from crawlers.NaverBlogCrawler import NaverBlogCrawler
 from crawlers.exceptions import UnsupportedURL
 
 
-def crawler_factory(url):
+def crawler_factory(url) -> BaseCrawler:
     if "school.iamservice.net" in url:
         return IamCrawler(url)
     elif "blog.naver.com" in url:
