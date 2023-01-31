@@ -1,15 +1,14 @@
-import datetime
-import zoneinfo
-
 from django.test import TestCase
 
-from board.models import Site, Post, Attachment
+from board.models import Site, Post, Attachment, PostSequence
 from django.utils import timezone
 
-from board.services import duplicate_check
 
 
 class MyTestCase(TestCase):
+    def setUp(self):
+        self.sequence = PostSequence()
+        self.sequence.save()
     def test_create(self):
         # given, when
         p = Post(
@@ -31,30 +30,6 @@ class MyTestCase(TestCase):
         self.assertEqual(p.site, Site.IAM)
         self.assertEqual(p.attachment_list.count(), 2)
 
-    def test_duplicate_check(self):
-        p1 = Post(
-            url="https://school.iamservice.net/organization/1674/group/2001892",
-            title="IAM1",
-            body="aa👏",
-            published_datetime=timezone.now(),
-            site=Site.IAM,
-            site_id="1234"
-        )
-        p1.save()
-        p2 = Post(
-            url="https://school.iamservice.net/organization/1674/group/2001892",
-            title="BBC1",
-            body="aa👏",
-            published_datetime=timezone.now(),
-            site=Site.IAM,
-            site_id="5678"
-        )
-        p2.save()
-
-        # 중복되는 id
-        result_set = duplicate_check(Site.IAM, ["1234", "2345", "3456", "4567", "5678"])
-        self.assertQuerysetEqual(result_set, [p1, p2], ordered=False)
-
     def test_relation_name(self):
         # given
         p1 = Post(
@@ -63,9 +38,24 @@ class MyTestCase(TestCase):
             body="aa👏",
             published_datetime=timezone.now(),
             site=Site.IAM,
-            site_id="1234"
         )
         p1.save()
 
         # when
         self.assertEqual(0, p1.attachment_list.all().count())
+
+    def test_duplicate(self):
+        print(self.sequence)
+        p1 = Post(
+            url="https://school.iamservice.net/organization/1674/group/2001892",
+            title="IAM1",
+            body="aa👏",
+            published_datetime=timezone.now(),
+            site=Site.IAM,
+            hashed_body='aaaaaa',
+            sequence=self.sequence
+        )
+        p1.save()
+
+        hashed_body = Post.objects.filter(hashed_body__in=['aaaaaa']).values_list('hashed_body', flat=True)
+        self.assertEqual('aaaaaa', hashed_body[0])
