@@ -35,7 +35,7 @@ class BBCCrawler(RequestCrawler[Tag]):
             'attachment_list': []
         }
 
-    def site_id_from_data(self, data: Tag):
+    def site_id_from_data(self, data: Tag) -> str:
         data = urlparse(data.select_one('guid').get_text())
         return data.path
 

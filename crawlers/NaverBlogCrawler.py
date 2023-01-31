@@ -14,10 +14,9 @@ from crawlers.BaseCrawler import RequestCrawler
 class NaverBlogCrawler(RequestCrawler[str]):
 
     def __init__(self, url):
+        super().__init__(url)
         self.site = "NAVERBLOG"
         self.parsed_url = urlparse(url)
-
-        super().__init__(url)
 
     def _parse_index(self, data) -> List[str]:
         urls = []
@@ -46,7 +45,7 @@ class NaverBlogCrawler(RequestCrawler[str]):
             'attachment_list': attachment_list
         }
 
-    def site_id_from_data(self, data):
+    def site_id_from_data(self, data) -> str:
         """
         url로 부터 unique한 siteid 생성
         """

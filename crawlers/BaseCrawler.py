@@ -9,6 +9,7 @@ T = TypeVar("T")
 
 class BaseCrawler(Generic[T], metaclass=ABCMeta):
     def __init__(self, url):
+        self.site = None
         self.request_data: Dict[str, T] = {}
         self.url = url
 
@@ -26,7 +27,7 @@ class BaseCrawler(Generic[T], metaclass=ABCMeta):
     def get_request_datas(self) -> List[T]:
         return list(self.request_data.values())
 
-    def remove_request_data_by_id(self, post_id):
+    def remove_request_data_by_id(self, post_id: str):
         if post_id in self.request_data:
             del self.request_data[post_id]
             return True
@@ -35,7 +36,6 @@ class BaseCrawler(Generic[T], metaclass=ABCMeta):
 
 
 class RequestCrawler(BaseCrawler[T], metaclass=ABCMeta):
-    site = None
 
     def __init__(self, url):
         super().__init__(url)
@@ -88,7 +88,7 @@ class RequestCrawler(BaseCrawler[T], metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def site_id_from_data(self, data):
+    def site_id_from_data(self, data) -> str:
         pass
 
     @abstractmethod

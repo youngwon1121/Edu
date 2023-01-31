@@ -49,8 +49,8 @@ class IamCrawler(RequestCrawler[dict]):
             'attachment_list': file
         }
 
-    def site_id_from_data(self, data: dict):
-        return data['id']
+    def site_id_from_data(self, data: dict) -> str:
+        return str(data['id'])
 
     def url_from_data(self, data: dict):
         return data['view_link']
