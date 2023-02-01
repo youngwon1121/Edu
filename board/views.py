@@ -19,5 +19,5 @@ def get(request: Request):
         serializer = PostSerializer(posts, many=True)
         return Response(
             {'count': len(serializer.data), 'data': serializer.data},
-            status=status.HTTP_200_OK
+            status=status.HTTP_201_CREATED
         )
