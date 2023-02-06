@@ -81,10 +81,11 @@ WSGI_APPLICATION = 'NHNEdu.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3'
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'board',
-        'PORT': 3307,
-        'HOST': '127.0.0.1',
+        'PORT': 3306,
+        'HOST': 'board-db',
         'USER': 'root',
         'PASSWORD': 'example',
         'OPTIONS': {

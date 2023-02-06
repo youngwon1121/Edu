@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    container_name: board-db
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_DATABASE: board
+
+
+  web:
+    container_name: board-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /app/venv
+      - .:/app/
+    ports:
+      - "8000:8000"
+    stdin_open: true
