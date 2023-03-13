@@ -16,7 +16,8 @@ class MyTestCase(TestCase):
             title="2023학년도 교과서 목록",
             body="aa👏",
             published_datetime=timezone.now(),
-            site=Site.IAM
+            site=Site.IAM,
+            sequence=self.sequence
         )
         p.save()
 
@@ -38,6 +39,7 @@ class MyTestCase(TestCase):
             body="aa👏",
             published_datetime=timezone.now(),
             site=Site.IAM,
+            sequence=self.sequence
         )
         p1.save()
 
@@ -45,17 +47,17 @@ class MyTestCase(TestCase):
         self.assertEqual(0, p1.attachment_list.all().count())
 
     def test_duplicate(self):
-        print(self.sequence)
         p1 = Post(
             url="https://school.iamservice.net/organization/1674/group/2001892",
             title="IAM1",
             body="aa👏",
             published_datetime=timezone.now(),
             site=Site.IAM,
-            hashed_body='aaaaaa',
+            hash_content='aaaaaa',
             sequence=self.sequence
         )
         p1.save()
 
-        hashed_body = Post.objects.filter(hashed_body__in=['aaaaaa']).values_list('hashed_body', flat=True)
-        self.assertEqual('aaaaaa', hashed_body[0])
+        hash_content = Post.objects.filter(hash_content__in=['aaaaaa']).values_list('hash_content', flat=True)
+        self.assertEqual('aaaaaa', hash_content[0])
+# ./manage.py test
