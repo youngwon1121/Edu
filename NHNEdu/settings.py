@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
 import sys
 from pathlib import Path
 
@@ -78,16 +79,14 @@ WSGI_APPLICATION = 'NHNEdu.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3'
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'board',
+        'NAME': os.environ.get('MARIADB_DATABASE', ''),
         'PORT': 3306,
         'HOST': 'board-db',
         'USER': 'root',
-        'PASSWORD': 'example',
+        'PASSWORD': os.environ.get('MARIADB_ROOT_PASSWORD', ''),
         'OPTIONS': {
             'charset': 'utf8mb4',
         }

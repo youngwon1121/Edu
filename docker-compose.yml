@@ -1,17 +1,17 @@
 version: '3'
 services:
   db:
+    env_file:
+      - .env
     container_name: board-db
     image: mariadb
     ports:
       - "3306:3306"
-    environment:
-      MARIADB_ROOT_PASSWORD: example
-      MARIADB_DATABASE: board
-
 
   web:
     container_name: board-backend
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
