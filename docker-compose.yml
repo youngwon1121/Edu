@@ -18,6 +18,8 @@ services:
     volumes:
       - /app/venv
       - .:/app/
+    environment:
+      PYTHONUNBUFFERED: 1
     ports:
       - "8000:8000"
     command: sh ./start.sh
